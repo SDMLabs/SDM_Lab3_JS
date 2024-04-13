@@ -1,11 +1,12 @@
-FROM node:20-bullseye
+FROM node:alpine
 
-WORKDIR /app/
+WORKDIR /app
 
-COPY public/ /app/public
-COPY src/ /app/src
-COPY package.json /app/
+COPY package*.json ./
 
-RUN npm install
+RUN npm ci --only=production
+
+COPY . .
+EXPOSE 3000
 
 CMD ["npm", "start"]
